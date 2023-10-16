@@ -79,7 +79,7 @@ permissions:
 jobs:
   notify-discord-start:
     name: Notify Discord (start)
-    uses: ForgeGHActionsTestOrg/Actions/.github/workflows/discord-build-notifier.yml@32a9bcc8d76c86f9f19eedb87a2bdcb3397f241a
+    uses: ForgeGHActionsTestOrg/Actions/.github/workflows/discord-build-notifier.yml@d1331d1c98f99ea0f5b9880c0d8938da11617c5f
     with:
       build_status: started
     secrets:
@@ -111,7 +111,7 @@ jobs:
     name: Notify Discord (end)
     needs: [ "notify-discord-start", "gradle" ]
     if: ${{ always() }}
-    uses: ForgeGHActionsTestOrg/Actions/.github/workflows/discord-build-notifier.yml@32a9bcc8d76c86f9f19eedb87a2bdcb3397f241a
+    uses: ForgeGHActionsTestOrg/Actions/.github/workflows/discord-build-notifier.yml@d1331d1c98f99ea0f5b9880c0d8938da11617c5f
     with:
       build_status: ${{ needs.gradle.result }}
       build_number: ${{ needs.notify-discord-start.outputs.build_number }}
