@@ -82,7 +82,7 @@ jobs:
     with:
       build_status: started
     secrets:
-      webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
   gradle:
     runs-on: ubuntu-latest
@@ -115,7 +115,7 @@ jobs:
       build_status: ${{ needs.gradle.result }}
       build_number: ${{ needs.notify-discord-start.outputs.build_number }}
     secrets:
-      webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
   promote-artifact:
     name: Promote artifact
