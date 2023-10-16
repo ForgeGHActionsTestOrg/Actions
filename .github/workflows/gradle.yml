@@ -118,17 +118,17 @@ jobs:
     secrets:
       DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
-  promote-artifact:
-    name: Promote artifact
-    needs: [ "notify-discord-start", "gradle" ]
-    if: needs.gradle.result == 'success' && inputs.artifact_name != 'dont promote'
-    uses: MinecraftForge/SharedActions/.github/workflows/promote-artifact.yml@main
-    with:
-      group: ${{ inputs.artifact_group }}
-      artifact: ${{ inputs.artifact_name }}
-      version: ${{ needs.notify-discord-start.outputs.build_number }}
-      type: ${{ inputs.promotion_type }}
-    secrets:
-      webhook_url: ${{ secrets.PROMOTE_ARTIFACT_WEBHOOK }}
-      username: ${{ secrets.PROMOTE_ARTIFACT_USERNAME }}
-      password: ${{ secrets.PROMOTE_ARTIFACT_PASSWORD }}
+  # promote-artifact:
+  #   name: Promote artifact
+  #   needs: [ "notify-discord-start", "gradle" ]
+  #   if: needs.gradle.result == 'success' && inputs.artifact_name != 'dont promote'
+  #   uses: MinecraftForge/SharedActions/.github/workflows/promote-artifact.yml@main
+  #   with:
+  #     group: ${{ inputs.artifact_group }}
+  #     artifact: ${{ inputs.artifact_name }}
+  #     version: ${{ needs.notify-discord-start.outputs.build_number }}
+  #     type: ${{ inputs.promotion_type }}
+  #   secrets:
+  #     webhook_url: ${{ secrets.PROMOTE_ARTIFACT_WEBHOOK }}
+  #     username: ${{ secrets.PROMOTE_ARTIFACT_USERNAME }}
+  #     password: ${{ secrets.PROMOTE_ARTIFACT_PASSWORD }}
