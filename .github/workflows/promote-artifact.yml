@@ -21,11 +21,11 @@ on:
         type: string
         default: "latest"
     secrets:
-      PAGEGEN_WEBHOOK:
+      PROMOTE_ARTIFACT_WEBHOOK:
         required: true
-      PAGEGEN_USERNAME:
+      PROMOTE_ARTIFACT_USERNAME:
         required: true
-      PAGEGEN_PASSWORD:
+      PROMOTE_ARTIFACT_PASSWORD:
         required: true
 
   workflow_dispatch:
@@ -82,8 +82,8 @@ jobs:
       - name: Notify webhook
         # language=bash
         run: |
-          curl --tlsv1.3 --compressed -sS -m 10 -u "${{ env.PAGEGEN_USERNAME }}:${{ env.PAGEGEN_PASSWORD }}" -H "Content-Type: application/json" --request POST -d '${{ steps.create-json.outputs.result }}' ${{ env.PAGEGEN_WEBHOOK }}
+          curl --tlsv1.3 --compressed -sS -m 10 -u "${{ env.PROMOTE_ARTIFACT_USERNAME }}:${{ env.PROMOTE_ARTIFACT_PASSWORD }}" -H "Content-Type: application/json" --request POST -d '${{ steps.create-json.outputs.result }}' ${{ env.PROMOTE_ARTIFACT_WEBHOOK }}
         env:
-          PAGEGEN_WEBHOOK: ${{ secrets.PAGEGEN_WEBHOOK }}
-          PAGEGEN_USERNAME: ${{ secrets.PAGEGEN_USERNAME }}
-          PAGEGEN_PASSWORD: ${{ secrets.PAGEGEN_PASSWORD }}
+          PROMOTE_ARTIFACT_WEBHOOK: ${{ secrets.PROMOTE_ARTIFACT_WEBHOOK }}
+          PROMOTE_ARTIFACT_USERNAME: ${{ secrets.PROMOTE_ARTIFACT_USERNAME }}
+          PROMOTE_ARTIFACT_PASSWORD: ${{ secrets.PROMOTE_ARTIFACT_PASSWORD }}
