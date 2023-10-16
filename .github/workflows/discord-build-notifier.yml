@@ -14,9 +14,9 @@ on:
         required: false
         type: string
         default: "https://avatars.githubusercontent.com/u/1390178"
-    secrets:
-      DISCORD_WEBHOOK:
+      discord_webhook:
         required: true
+        type: string
     outputs:
       build_number:
         value: ${{ jobs.notify-discord.outputs.build_number }}
@@ -140,6 +140,6 @@ jobs:
       - name: Send notification
         # language=bash
         run: |
-          curl --http2-prior-knowledge --tlsv1.3 --false-start --tcp-fastopen --compressed -sS -m 10 -H "Content-Type: application/json" --request POST -d '${{ steps.create-json.outputs.result }}' ${{ secrets.DISCORD_WEBHOOK }}
+          curl --http2-prior-knowledge --tlsv1.3 --false-start --tcp-fastopen --compressed -sS -m 10 -H "Content-Type: application/json" --request POST -d '${{ steps.create-json.outputs.result }}' ${{ inputs.discord_webhook }}
     outputs:
       build_number: ${{ steps.get-build-number.outputs.result }}
