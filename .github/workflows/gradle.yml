@@ -33,6 +33,8 @@ on:
         required: false
         type: string
         default: "latest"
+    secrets:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
   workflow_dispatch:
     inputs:
