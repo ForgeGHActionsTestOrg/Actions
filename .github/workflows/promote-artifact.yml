@@ -21,11 +21,11 @@ on:
         type: string
         default: "latest"
     secrets:
-      webhook_url:
+      PAGEGEN_WEBHOOK:
         required: true
-      username:
+      PAGEGEN_USERNAME:
         required: true
-      password:
+      PAGEGEN_PASSWORD:
         required: true
 
   workflow_dispatch:
@@ -50,13 +50,6 @@ on:
         options:
           - "latest"
           - "recommended"
-    secrets:
-      webhook_url:
-        required: true
-      username:
-        required: true
-      password:
-        required: true
 
 jobs:
   promote-artifact:
@@ -89,8 +82,8 @@ jobs:
       - name: Notify webhook
         # language=bash
         run: |
-          curl --tlsv1.3 --compressed -sS -m 10 -u "${{ env.USERNAME }}:${{ env.PASSWORD }}" -H "Content-Type: application/json" --request POST -d '${{ steps.create-json.outputs.result }}' ${{ env.PAGEGEN_WEBHOOK }}
+          curl --tlsv1.3 --compressed -sS -m 10 -u "${{ env.PAGEGEN_USERNAME }}:${{ env.PAGEGEN_PASSWORD }}" -H "Content-Type: application/json" --request POST -d '${{ steps.create-json.outputs.result }}' ${{ env.PAGEGEN_WEBHOOK }}
         env:
-          PAGEGEN_WEBHOOK: ${{ secrets.webhook_url }}
-          USERNAME: ${{ secrets.username }}
-          PASSWORD: ${{ secrets.password }}
+          PAGEGEN_WEBHOOK: ${{ secrets.PAGEGEN_WEBHOOK }}
+          PAGEGEN_USERNAME: ${{ secrets.PAGEGEN_USERNAME }}
+          PAGEGEN_PASSWORD: ${{ secrets.PAGEGEN_PASSWORD }}
